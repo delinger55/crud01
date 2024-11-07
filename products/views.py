@@ -23,7 +23,7 @@ def product_detail(request, id):
     product = get_object_or_404(Product, pk=id)   
     return render(request, 'products/product_detail.html', {'products':product})
 
-def product_update(request, pk):
+def product_update(request, id):
     product = get_object_or_404(Product, pk=id)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
@@ -32,7 +32,7 @@ def product_update(request, pk):
             return redirect('product_list')
     else:
         form = ProductForm(instance=product)   
-    return render(request, 'products/producto_form.html', {'form':form})   
+    return render(request, 'products/product_form.html', {'form':form})   
 
 def product_delete(request, id):
     product = get_object_or_404(Product, pk=id)
