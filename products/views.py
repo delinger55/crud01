@@ -21,7 +21,7 @@ def product_list(request):
 #leer detalle
 def product_detail(request, id):
     product = get_object_or_404(Product, pk=id)   
-    return render(request, 'products/product_detail.html', {'products':product})
+    return render(request, 'products/product_detail.html', {'product':product})
 
 def product_update(request, id):
     product = get_object_or_404(Product, pk=id)
