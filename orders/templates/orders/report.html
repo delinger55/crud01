@@ -4,6 +4,7 @@
     <tr>
         <th>id de Orden</th>
         <th>Producto</th>
+        <th>Cliente</th>
         <th>Cantidad</th>
         <th>Precio unitario</th>
         <th>Total</th>
@@ -13,7 +14,8 @@
         {% for order in orders %}
         <td>{{order.id}}</td>
         <td>{{order.product.name}}</td>
-        <td>{{order.quentity}}</td>
+        <td>{{order.cliente.nombre}}</td>
+        <td>{{order.quantity}}</td>
         <td>{{order.product.price}}</td>
         <td>${{order.quantity|multiply:order.product.price}}</td>
         <td>{{order.created_at}}</td>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Order
 from products.models import Product
+from clientes.models import Cliente
 from .forms import OrderForm
 from .forms import ReportFilterForm
 
@@ -26,9 +27,10 @@ def report_view(request):
 
 def report_view_form(request):
     form = ReportFilterForm(request.GET or None)  
-    orders = Order.objects.select_related('product').all()  
+    orders = Order.objects.select_related('product', 'cliente').all()  
     if form.is_valid():
         product = form.cleaned_data.get('product')
+        cliente = form.cleaned_data.get('cliente')
         start_date = form.cleaned_data.get('start_date')
         end_date = form.cleaned_data.get('end_date')
         min_quantity = form.cleaned_data.get('min_quantity')
@@ -36,6 +38,8 @@ def report_view_form(request):
         
         if product:
             orders = orders.filter(product = product)
+        if cliente:
+            orders = orders.filter(cliente = cliente)    
         if start_date:
             orders = orders.filter(created_at__gte = start_date) 
         if end_date:
